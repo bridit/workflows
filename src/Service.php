@@ -87,7 +87,7 @@ class Service
    * @return Response
    * @throws Throwable
    */
-  public function continue(TaskWorkflow $workflow, array $values = [], ?string $tokenId = null, mixed $interaction): Response
+  public function continue(TaskWorkflow $workflow, array $values = [], ?string $tokenId = null, mixed $interaction = null): Response
   {
     $engine = $this->getProcessEngine($workflow, $values);
 

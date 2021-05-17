@@ -103,7 +103,9 @@ class ProcessEngine extends \Formapro\Pvm\ProcessEngine
     
     $this->startNode = $this->token->getTo();
 
-    $this->setLastInteraction($this->startNode, $interaction);
+    if (!blank($interaction)) {
+      $this->setLastInteraction($this->startNode, $interaction);
+    }
 
     $tmpTransitions = [];
 
@@ -133,7 +135,7 @@ class ProcessEngine extends \Formapro\Pvm\ProcessEngine
 
   /**
    * @param string|null $tokenId
-   * @return Token|void
+   * @return void
    */
   protected function initToken(string $tokenId = null)
   {
@@ -146,7 +148,7 @@ class ProcessEngine extends \Formapro\Pvm\ProcessEngine
    * @param \Formapro\Pvm\Node $node
    * @param mixed $interaction
    */
-  protected function setLastInteraction(Node $node, mixed $interaction): void
+  protected function setLastInteraction(Node $node, mixed $interaction = null): void
   {
     $this->token
       ->setValue('nodes.' . $node->getId() . '.interaction', $interaction);
